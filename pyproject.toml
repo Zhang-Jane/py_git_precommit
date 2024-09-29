@@ -1,0 +1,108 @@
+# https://mypy.readthedocs.io/en/stable/config_file.html
+# 重要的是要理解，配置文件没有合并，因为它会导致歧义。 --config-file 命令行标志具有最高的优先级，并且必须正确;否则mypy将报告错误并退出。如果没有命令行选项，mypy将按照上面的优先级顺序查找配置文件。
+[tool.mypy]
+# 排除特定的文件或目录
+exclude = [
+    '^test*\.py$',  # TOML literal string (single-quotes, no escaping necessary)
+    "^test*\\.py$",  # TOML basic string (double-quotes, backslash and other characters need escaping)
+]
+
+
+# 启用严格模式，它将启用一组对类型检查更严格的选项
+strict = true
+
+# 显示详细的错误信息
+show_error_context = true
+
+# 允许推断为 Any 的变量
+allow_untyped_calls = false
+
+# 如果没有提供类型注释，允许推断为 Any
+allow_untyped_globals = false
+
+# 检查未使用的忽略指示符（# type: ignore）
+warn_unused_ignores = true
+
+# 检查未使用的导入
+warn_unused_configs = true
+
+# 警告没有类型提示的函数
+warn_no_return = true
+
+# 为 None 检查错误
+no_implicit_optional = true
+
+# 忽略缺少导入的模块（例如 C 扩展模块）
+ignore_missing_imports = true
+
+# 忽略特定的错误类型
+disable_error_code = ["misc", "no-untyped-def", "no-untyped-call"]
+
+# 启用对字节码文件的缓存以提高性能
+cache_dir = ".mypy_cache"
+
+# 指定要检查的文件或目录
+files = ["src"]
+
+# 打开或关闭特定的类型检查规则
+check_untyped_defs = true
+disallow_any_unimported = true
+disallow_any_expr = true
+disallow_any_generics = true
+disallow_any_decorated = true
+
+# 禁止未注释的函数定义
+disallow_untyped_defs = true
+
+# 禁止未注释的调用
+disallow_untyped_calls = true
+
+# 禁止无类型注释的全局变量
+disallow_untyped_globals = true
+
+# 禁止使用动态类型（Any）
+disallow_any_explicit = true
+
+# 禁止将 None 隐式地分配给可选类型
+disallow_subclassing_any = true
+
+# 启用对更严格的类型检查
+strict_optional = false
+
+# 启用对字面量类型的支持
+allow_redefinition = false
+
+# 警告对动态类型的使用
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+
+# 允许和忽略的类型别名
+implicit_reexport = true
+
+# 指定 Python 版本
+python_version = "3.9"
+
+# 启用对插件的支持
+plugins = []
+
+# 针对特定模块的配置
+[[tool.mypy.overrides]]
+module = "*.tests.*"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "somelibrary"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "path.to.ignore"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "django.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "numpy.*"
+ignore_missing_imports = true

@@ -1,0 +1,90 @@
+[MASTER]
+# 允许 Pylint 处理的最大行数。设置为 -1 表示没有限制。
+max-line-length=10000
+
+# 需要忽略的文件或目录，以逗号分隔。
+ignore=CVS
+
+[MESSAGES CONTROL]
+# 禁用特定的警告信息。你可以使用消息 ID 或消息名称。
+# 开始
+# enable=C0111
+# 关闭
+disable=
+    C0111,  # Missing module docstring
+    C0103,  # Variable name doesn't conform to snake_case naming style
+    R0903,  # Too few public methods
+    C0209,  # Formatting a regular string which could be an f-string (consider-using-f-string)
+    W1202,  # Use lazy % formatting in logging functions (logging-format-interpolation)
+    W1508,  # invalid-envvar-default
+
+[REPORTS]
+# 启用或禁用报告
+reports=no
+
+[BASIC]
+# 命名约定
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# 函数名的命名规则
+function-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# 常量的命名规则
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+
+[FORMAT]
+# 单行最大长度
+max-line-length=145
+
+# 单个导入组内允许的最大导入数
+max-module-lines=1200
+
+# 类和函数之间的空行数
+expected-line-ending-format=LF
+good-names=i,j,k,ex,Run,_
+
+[DESIGN]
+
+# 函数/方法的最大参数数
+max-args=10
+
+# 函数/方法主体局部变量的最大数量
+max-locals=50
+
+# 函数/方法主体中的最大语句数
+max-statements=120
+
+# 函数/方法主体嵌套块的最大数量
+max-nested-blocks=10
+
+# 允许最大instance attributes
+max-attributes = 100
+
+# 方法的最大分支数
+max-branches=50
+
+# 类的最大公共方法数
+max-public-methods=20
+
+[IMPORTS]
+# 允许导入的最大行数
+max-import-lines=10
+
+# 分组导入，Google 风格要求标准库、第三方库和本地库分开
+known-standard-library=numpy,scipy
+
+[TYPECHECK]
+# 忽略的模块
+ignored-modules=
+
+[MISCELLANEOUS]
+# 忽略的注释正则表达式
+notes=FIXME,XXX,TODO
+
+[LOGGING]
+# 格式化字符串检查
+logging-format-style=old
+
+[SIMILARITIES]
+# 最大代码块重复行数
+min-similarity-lines=4

@@ -1,0 +1,49 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-all-py  # 每个钩子都有一个唯一的标识符（id），用于引用该钩子。
+        name: Check Local .py Script
+        entry: bash check_py_files.sh
+        language: system  # 每个钩子都有一个唯一的标识符（id），用于引用该钩子。
+        files: \.py$  # 每个钩子都有一个唯一的标识符（id），用于引用该钩子。
+        stages: [commit]  # 指定钩子在哪些阶段运行。在这里，钩子将在提交阶段运行。
+        always_run: true  # 指定钩子是否在每次提交时都运行，即使没有相关文件更改
+      - id: check-added-large-files
+        name: Check Added Large Files  # 添加 name 键
+        entry: echo "Check Added Large Files"  # 添加 entry 键
+        language: system
+        args: ['--maxkb=10240']  # 设置最大文件大小为10MB
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0 # 指定了使用的版本，这里是 v4.6.0。
+    hooks:
+      - id: end-of-file-fixer # 确保文件以换行符结束。
+      - id: trailing-whitespace # 删除行尾的多余空格。
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.29.2
+    hooks:
+      - id: check-github-workflows
+        args: ["--verbose"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell # 用于检查拼写错误，--write-changes 参数表示自动修复拼写错误。
+        args: ["--write-changes"]
+  - repo: https://github.com/tox-dev/tox-ini-fmt
+    rev: "1.4.1"
+    hooks:
+      - id: tox-ini-fmt # 格式化 tox.ini 文件，-p fix 参数表示进行修复。
+        args: ["-p", "fix"]
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "2.2.4"
+    hooks:
+      - id: pyproject-fmt # 格式化 pyproject.toml 文件。
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.6.7"
+    hooks:
+      - id: ruff-format # 用于格式化代码。
+      - id: ruff
+        args: ["--fix", "--unsafe-fixes", "--exit-non-zero-on-fix"] # 进行代码检查，--fix 表示自动修复，--unsafe-fixes 允许不安全的修复，--exit-non-zero-on-fix 表示如果进行了修复则返回非零状态。
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply # 检查所有钩子是否都已应用。
+      - id: check-useless-excludes # 检查配置中是否存在无用的排除项。
