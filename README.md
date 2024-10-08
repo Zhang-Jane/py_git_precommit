@@ -354,7 +354,8 @@ ignore_missing_imports = true
 ```
 
 ## 3. 创建git的pre-commit
-
+**Git hooks manager:**
+https://github.com/evilmartians/lefthook
 ```bash
 # 使用 pre-commit 工具，它允许你管理和配置多个预提交钩子
 1. pip install pre-commit

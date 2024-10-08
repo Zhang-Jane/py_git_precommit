@@ -1,0 +1,42 @@
+# .gitleaks.toml
+
+title = "Gitleaks Configuration"
+
+# 使用该选项可定义要扫描的源文件（例如路径或组织）
+source = "."
+
+# 设置 Gitleaks 的全局配置
+[global]
+  verbose = true  # 设置为 true 表示运行时输出详细信息
+  log-opts = "full"  # 可选：设置日志选项，如 "full" 或 "inline"
+  redact = true  # 是否在输出中隐藏秘密内容
+
+[[rules]]
+  id = "generic_api_key"
+  description = "Generic API Key"
+  regex = '''(?i)(api_key|api-key|apikey|secret|token|access_token|access-token|accesskey|access_key)["'\s:=]*([A-Za-z0-9\-_=]+)'''
+  tags = ["apikey", "secret"]
+
+[[rules]]
+  id = "aws_access_key"
+  description = "AWS Access Key"
+  regex = '''AKIA[0-9A-Z]{16}'''
+  tags = ["aws", "key"]
+
+[[rules]]
+  id = "aws_secret_key"
+  description = "AWS Secret Key"
+  regex = '''(?i)aws(.{0,20})?(?-i)['\"][0-9a-zA-Z\/+]{40}['\"]'''
+  tags = ["aws", "secret"]
+# 可以在此处定义排除的文件或路径
+# [allowlist]
+#   paths = ["example/path/to/ignore"]
+
+# 如果需要排除某些特定的秘密或规则，可以使用下面的配置
+# [[allowlist.rules]]
+#   description = "Exclude specific false positive"
+#   regex = "falsepositive1"
+
+# [[allowlist.patterns]]
+#   description = "Exclude pattern"
+#   pattern = "(?i)EXAMPLE_PATTERN"

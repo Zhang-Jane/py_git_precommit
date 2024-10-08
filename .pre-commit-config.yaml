@@ -13,6 +13,11 @@ repos:
         entry: echo "Check Added Large Files"  # 添加 entry 键
         language: system
         args: ['--maxkb=10240']  # 设置最大文件大小为10MB
+  - repo: https://github.com/gitleaks/gitleaks # 用于检测和防止 git 存储库中的密码、API 密钥和令牌等硬编码机密
+    rev: v8.19.0
+    hooks:
+      - id: gitleaks
+        args: ['detect', '-v', '--source', '.', '--config=.gitleaks.toml']
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0 # 指定了使用的版本，这里是 v4.6.0。
     hooks:
