@@ -66,10 +66,6 @@ max-branches=50
 # 类的最大公共方法数
 max-public-methods=20
 
-[IMPORTS]
-# 允许导入的最大行数
-max-import-lines=10
-
 # 分组导入，Google 风格要求标准库、第三方库和本地库分开
 known-standard-library=numpy,scipy
 
