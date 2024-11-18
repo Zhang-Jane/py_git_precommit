@@ -84,3 +84,6 @@ logging-format-style=old
 [SIMILARITIES]
 # 最大代码块重复行数
 min-similarity-lines=4
+
+# 增强 PyLints 对模型和字段的理解
+load-plugins=tortoise.contrib.pylint
